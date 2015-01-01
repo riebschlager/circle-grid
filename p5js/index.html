@@ -8,9 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.15/p5.min.js"></script>
     <script src="assets/js/circle-grid.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-<div id="canvas-container">
-</div>
+    <div class="container">
+        <h1>Circle Grid <span>by Chris Riebschlager</span></h1>
+        <input id="file-upload" type="file" class="hide" onchange="onInputChange(this)">
+        <button class="btn btn-primary btn-block" onclick="triggerUpload()">Upload Image</button>
+        <label for="number-of-circles">Number of Circles</label>
+        <input class="form-control" type="range" onchange="sketch.render()" id="number-of-circles" value="15" min="10" max="50">
+        <label for="number-of-circles">Number of Inner Circles</label>
+        <input class="form-control" type="range" onchange="sketch.render()" id="number-of-inner-circles" value="15" min="1" max="100">
+    </div>
+    <div class="container">
+        <div id="canvas-container">
+        </div>
+    </div>
 </body>
 </html>
