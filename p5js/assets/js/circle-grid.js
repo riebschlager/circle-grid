@@ -1,6 +1,7 @@
 var s = function(p5) {
 
   p5._pixelDensity = 1;
+  var saveId = 0;
 
   var colorSrc;
 
@@ -9,10 +10,12 @@ var s = function(p5) {
     x: 0,
     y: 0,
     width: undefined,
-    height: undefined,
-    shade: 50,
-    rotation: 0,
-    scale: 1
+    height: undefined
+  };
+
+  p5.doSave = function() {
+    saveId++;
+    p5.save('circle-grid-' + saveId + '.png');
   };
 
   p5.chooseColor = function(x, y, w) {
@@ -24,7 +27,6 @@ var s = function(p5) {
       var r = colorSrc.pixels[4 * (rCy * colorSrc.width + rCx)];
       var g = colorSrc.pixels[4 * (rCy * colorSrc.width + rCx) + 1];
       var b = colorSrc.pixels[4 * (rCy * colorSrc.width + rCx) + 2];
-      var a = colorSrc.pixels[4 * (rCy * colorSrc.width + rCx) + 3];
       p5.fill(r, g, b);
     }
   };
@@ -40,9 +42,6 @@ var s = function(p5) {
       }
       customBg.x = p5.width / 2 - customBg.width / 2;
       customBg.y = p5.height / 2 - customBg.height / 2;
-      customBg.shade = 0;
-      customBg.rotation = 0;
-      customBg.scale = 1;
       var nX = customBg.x + p5.width / 2;
       var nY = customBg.y + p5.height / 2;
       colorSrc.background(0);
@@ -59,11 +58,11 @@ var s = function(p5) {
     p5.ellipseMode(p5.CENTER);
 
     var points = [];
-    var circlesH = parseInt(document.getElementById('number-of-circles').value);
-    var circlesV = parseInt(circlesH * (p5.width / p5.height));
-    var circleWidth = parseInt(p5.width / circlesH);
+    var circlesH = Math.ceil(document.getElementById('number-of-circles').value);
+    var circlesV = Math.ceil(circlesH * (p5.width / p5.height));
+    var circleWidth = Math.ceil(p5.width / circlesH);
     var innerCircles = p5.map(document.getElementById('number-of-inner-circles').value, 1, 100, 1, circleWidth);
-    var innerCircleStep = parseInt(circleWidth / innerCircles);
+    var innerCircleStep = Math.ceil(circleWidth / innerCircles);
 
     // Populate the points array
 
@@ -81,7 +80,7 @@ var s = function(p5) {
       var rp = points[p5.floor(p5.random(points.length))];
       var mult = p5.random(1.5, 4);
       for (var i = 0; i < circleWidth * mult; i += innerCircleStep) {
-        p5.chooseColor(rp.x, rp.y, circleWidth * mult);
+        p5.chooseColor(parseInt(rp.x), parseInt(rp.y), circleWidth * mult);
         p5.ellipse(rp.x, rp.y, (circleWidth * mult - i), (circleWidth * mult - i));
       }
     }
@@ -92,13 +91,13 @@ var s = function(p5) {
       for (var jy = 0; jy < circlesV; jy++) {
         var cX = jx * circleWidth + circleWidth / 2;
         var cY = jy * circleWidth + circleWidth / 2;
-        for (var i = 0; i < circleWidth; i += innerCircleStep) {
-          p5.chooseColor(cX, cY, circleWidth);
-          p5.ellipse(cX, cY, (circleWidth - i), (circleWidth - i));
+        for (var k = 0; k < circleWidth; k += innerCircleStep) {
+          p5.chooseColor(parseInt(cX), parseInt(cY), circleWidth);
+          p5.ellipse(cX, cY, (circleWidth - k), (circleWidth - k));
         }
       }
     }
-    
+
   };
 
   p5.setup = function() {
