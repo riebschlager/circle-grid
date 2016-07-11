@@ -9,7 +9,7 @@ void setup() {
   noStroke();
   src = loadImage("https://c1.staticflickr.com/8/7310/27946429080_44d3334ba0_c.jpg");
   src.resize(width, height);
-  circleWidth = width/20;
+  circleWidth = width / 20;
   int circlesH = floor(width / circleWidth);
   int circlesV = floor(height / circleWidth);
   ArrayList<PVector> points = new ArrayList<PVector>();
