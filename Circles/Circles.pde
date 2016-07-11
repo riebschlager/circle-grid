@@ -1,5 +1,4 @@
 import java.util.Iterator;
-import java.util.Date;
 
 PImage src;
 int circleWidth;
