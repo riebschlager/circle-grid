@@ -7,9 +7,9 @@ void setup() {
   size(3840, 2160);
   background(0);
   noStroke();
-  src = loadImage("https://c1.staticflickr.com/8/7310/27946429080_44d3334ba0_c.jpg");
+  src = loadImage("jy992j_7gus-clem-onojeghuo.jpg");
   src.resize(width, height);
-  circleWidth = width / 20;
+  circleWidth = width / 40;
   int circlesH = floor(width / circleWidth);
   int circlesV = floor(height / circleWidth);
   ArrayList<PVector> points = new ArrayList<PVector>();
